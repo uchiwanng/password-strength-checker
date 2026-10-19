@@ -1,0 +1,5 @@
+# 统一用 LF 存库，Windows 检出也不改行尾，保证 index.html 可字节级复现
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary

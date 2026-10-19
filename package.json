@@ -1,0 +1,28 @@
+{
+  "name": "password-strength-checker",
+  "version": "1.0.0",
+  "description": "零依赖、零网络请求的密码强度检测工具，单文件可离线运行",
+  "keywords": [
+    "password",
+    "password-strength",
+    "security",
+    "privacy",
+    "offline",
+    "zero-dependency"
+  ],
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "index.html"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "check": "node build.js --check",
+    "test": "node tests/detector.test.js && node tests/artifact.test.js",
+    "test:detector": "node tests/detector.test.js",
+    "test:artifact": "node tests/artifact.test.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# 单文件产物，无需构建环境：跑完测试后直接把仓库根目录发布出去。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 校验产物与测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 产物与 src/ 是否同步
+        run: node build.js --check
+      - name: 算法单测
+        run: node tests/detector.test.js
+      - name: 产物静态核查
+        run: node tests/artifact.test.js
+
+  deploy:
+    name: 发布到 Pages
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>密码强度检测 · 本机运行</title>
+<style>
+__CSS__
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <h1>密码强度检测</h1>
+    <p class="sub">输入即评分 · 完全在本机运行 · 不上传、不存储、不留痕</p>
+  </header>
+
+  <section class="card">
+    <label class="field-label" for="pwd">密码</label>
+    <div class="input-row">
+      <input id="pwd" type="password" autocomplete="new-password" spellcheck="false"
+             autocapitalize="off" autocorrect="off"
+             placeholder="在这里输入要检测的密码" aria-describedby="meter-hint">
+      <button id="toggle" class="btn ghost" type="button" aria-pressed="false">显示</button>
+      <button id="clear" class="btn ghost" type="button">清空</button>
+    </div>
+
+    <div class="meter">
+      <div class="meter-track" id="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="密码强度评分">
+        <div class="meter-fill" id="fill"></div>
+      </div>
+      <div class="meter-meta">
+        <span class="level" id="level">等待输入</span>
+        <span class="score" id="score">— / 100</span>
+      </div>
+      <p class="hint" id="meter-hint">建议使用 12 位以上、混合多种字符的密码</p>
+    </div>
+
+    <div class="examples">
+      <span>试试：</span>
+      <button class="chip" type="button" data-pwd="123456">123456</button>
+      <button class="chip" type="button" data-pwd="P@ssw0rd">P@ssw0rd</button>
+      <button class="chip" type="button" data-pwd="correct horse battery staple">correct horse battery staple</button>
+    </div>
+
+    <details class="advanced">
+      <summary>高级选项（可选）</summary>
+      <div class="adv-grid">
+        <label>用户名
+          <input id="username" type="text" autocomplete="off" spellcheck="false" placeholder="检测密码是否包含账号名">
+        </label>
+        <label>邮箱
+          <input id="email" type="email" autocomplete="off" spellcheck="false" placeholder="可选">
+        </label>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" id="result" hidden>
+    <div class="cols">
+      <div>
+        <h2>问题诊断</h2>
+        <ul class="issues" id="issues"></ul>
+      </div>
+      <div>
+        <h2>改进建议</h2>
+        <ol class="suggestions" id="suggestions"></ol>
+      </div>
+    </div>
+
+    <details class="breakdown">
+      <summary>评分明细</summary>
+      <table>
+        <tbody id="breakdown"></tbody>
+      </table>
+      <p class="note" id="entropy-note"></p>
+    </details>
+
+    <div class="actions">
+      <button class="btn" id="copy" type="button">复制检测结果</button>
+      <span class="copied" id="copied" hidden>已复制</span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    本工具仅评估口令本身的强度，不能防止钓鱼、撞库与设备被控。所有计算都在浏览器内存中完成，
+    页面不发起任何网络请求，也不会把密码写入本地存储或日志。
+  </footer>
+
+</div>
+<div class="sr-only" id="live" aria-live="polite"></div>
+<script>
+__RULES__
+</script>
+<script>
+__DETECTOR__
+</script>
+<script>
+__APP__
+</script>
+</body>
+</html>
