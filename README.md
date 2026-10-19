@@ -1,6 +1,11 @@
 # 简易密码强度检测工具
 
+[![Deploy to GitHub Pages](https://github.com/uchiwanng/password-strength-checker/actions/workflows/pages.yml/badge.svg)](https://github.com/uchiwanng/password-strength-checker/actions/workflows/pages.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
 输入即评分，**完全在浏览器本机运行**：不上传、不存储、不发起任何网络请求。
+
+**在线体验：<https://uchiwanng.github.io/password-strength-checker/>**
 
 - 直接使用：双击 `index.html`（单文件，38 KB，无任何依赖）
 - 单元测试：`node tests/detector.test.js && node tests/artifact.test.js`
@@ -147,7 +152,8 @@ npm test
 ```
 
 推送到 `main` 后，`.github/workflows/pages.yml` 会先跑三条校验，再发布到 GitHub Pages。
-Pages 需要在仓库 Settings → Pages → Build and deployment 里把 Source 设为 **GitHub Actions**（只需设置一次）。
+本仓库的 Pages Source 已经设为 **GitHub Actions**，改完代码推上去即自动部署到
+<https://uchiwanng.github.io/password-strength-checker/>。
 
 ## 9. 已知取舍
 
